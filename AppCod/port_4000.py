@@ -15,11 +15,11 @@ def start_server():
         # Принимаем входящее соединение
         conn, addr = s.accept()
         print('Connected by', addr)
-
+        
         # Отправляем сообщение клиенту
-        message = b'48888 porti harcman patasxan@'
-        conn.sendall(message)
-
+        message = b'48888 porti harcman patasxan@ '
+        conn.sendall(message)       
+        
         # Записываем сообщение в файл
         with open('output.txt', 'wb') as f:
             f.write(message)
