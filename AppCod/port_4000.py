@@ -17,7 +17,7 @@ def start_server():
         print('Connected by', addr)
 
         # Отправляем сообщение клиенту
-        message = b'test praydon'
+        message = b'48888 porti harcman patasxan@'
         conn.sendall(message)
 
         # Записываем сообщение в файл
