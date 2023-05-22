@@ -14,4 +14,3 @@ RUN echo "alias nt='netstat -lntu'" >> /etc/bash.bashrc
 RUN bash
 
 RUN echo "Bari Luys" > /var/www/html/index.html
-
