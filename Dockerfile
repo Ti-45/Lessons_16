@@ -1,29 +1,29 @@
+# escape=` 
 # Stage 1: Create a lightweight development image
-FROM python:3.10.6 AS prog
+FROM ubuntu:22.04 AS build
 
-# Set the working directory inside the container
+RUN apt update && apt upgrade -y && apt install -y `
+    nginx `
+    python3 `
+    python3-pip
+
 WORKDIR /home/dell/Lessons_16/AppCode
 
-# Copy port_48888.py to the working directory
 COPY port_48888.py ./
 
-# Install application dependencies
-RUN pip3 install
+#RUN pip3 run build
 
-# Copy the entire application code to the working directory
-COPY . .
+#COPY ./ /home/dell/Lessons_16/AppCode/multistej
 
-# Expose port 48888 for the application to listen on
 EXPOSE 48888
 
 # Stage 2: Create a lightweight production image
-FROM python:3.10.6 AS prod
+FROM ubuntu:22.04 AS PD
 
-# Set the working directory inside the container
-WORKDIR /usr/src/app
+#RUN apt update && apt upgrade -y
 
-# Copy the built application from the 'dev' stage to the working directory in the 'prod' stage
-COPY --from=prog /home/dell/Lessons_16/AppCode .
+WORKDIR /home/dell/Lessons_16/AppCode
 
-# Specify the command to start the application
+COPY --from=build /home/dell/Lessons_16/AppCode .
+
 CMD [ "pip3", "start" ]
