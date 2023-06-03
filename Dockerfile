@@ -11,7 +11,7 @@ WORKDIR /home/dell/Lessons_16/AppCode
 
 COPY port_48888.py ./
 
-#RUN pip3 run build
+RUN pip3 run build
 
 #COPY ./ /home/dell/Lessons_16/AppCode/multistej
 
