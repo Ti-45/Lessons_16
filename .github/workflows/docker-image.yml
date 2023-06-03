@@ -1,0 +1,48 @@
+name: Docker build image and push to ECR
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'Dockerfile'
+      - 'port_48888.py'
+      - 'requirements.txt'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'Dockerfile'
+      - 'port_48888.py'
+      - 'requirements.txt'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and Push Docker Image
+        env:
+          ECR_REGISTRY:  815111324020.dkr.ecr.eu-central-1.amazonaws.com
+          ECR_REPOSITORY: images
+          COMMIT_HASH: ${{ github.event.head_commit.id }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${COMMIT_HASH} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:${COMMIT_HASH}
