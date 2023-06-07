@@ -43,8 +43,8 @@ jobs:
 
       - name: Tag and push Docker image to AWS ECR
         run: |
-          docker tag flask:${{ env.VERSION_TAG }} 304959566889.dkr.ecr.us-east-1.amazonaws.com/bdg:${{ env.VERSION_TAG }}
-          docker push 304959566889.dkr.ecr.us-east-1.amazonaws.com/bdg:${{ env.VERSION_TAG }}
+          docker tag flask:${{ env.VERSION_TAG }} 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:${{ env.VERSION_TAG }}
+          docker push 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:${{ env.VERSION_TAG }}
 
       - name: Execute version and name
         run: |
