@@ -44,3 +44,8 @@ jobs:
         run: |
           docker tag flask:${{ steps.get_tag.outputs.TAG_NAME }} 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:${{ steps.get_tag.outputs.TAG_NAME }}
           docker push 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:${{ steps.get_tag.outputs.TAG_NAME }}
+          
+      - name: Execute version and name
+        run: |
+          echo "Название приложения: Flask"
+          echo "Версия тега: ${{ steps.get_tag.outputs.TAG_NAME }}"
