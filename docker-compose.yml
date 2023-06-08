@@ -1,0 +1,10 @@
+version: '3'
+services:
+  my-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+    - PORT=48888
+    ports:
+    - "48888:48888"
