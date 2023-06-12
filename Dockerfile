@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-WORKDIR /home/dell/Lessons_16/app-code
+WORKDIR /app-code
 
 RUN apt update && apt upgrade -y && apt install python3 -y
 
