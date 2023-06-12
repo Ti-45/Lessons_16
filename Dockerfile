@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 
+FROM ubuntu:22.04
 
 WORKDIR /home/dell/Lessons_16/app-code
 
