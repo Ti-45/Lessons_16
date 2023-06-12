@@ -4,6 +4,6 @@ WORKDIR /app-code
 
 RUN apt update && apt upgrade -y && apt install python3 -y
 
-COPY port_48888.py ./
+COPY ./app-code/ /app-code/
 
 CMD [ "python3", "port_48888.py" ]
