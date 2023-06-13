@@ -24,11 +24,11 @@ jobs:
 
       - name: Get tag name
         id: get_tag
-        run: echo ::set-output name=TAG_NAME::HTTP_server-${GITHUB_REF#refs/tags/}
+        run: echo ::set-output name=TAG_NAME::portforward-${GITHUB_REF#refs/tags/}
   
       - name: Check tag format
         run: |
-            if [[ ! "${{ steps.get_tag.outputs.TAG_NAME }}" =~ ^HTTP_server-v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            if [[ ! "${{ steps.get_tag.outputs.TAG_NAME }}" =~ ^portforward-v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
               echo "Invalid tag format. Only semantic versions of tags are allowed"
               exit 1
             fi
@@ -38,15 +38,15 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t HTTP_server:${{ steps.get_tag.outputs.TAG_NAME }} -f Dockerfile .
+          docker build -t portforward:${{ steps.get_tag.outputs.TAG_NAME }} -f Dockerfile .
         working-directory: ${{ github.workspace }}
 
       - name: Tag and push Docker image to AWS ECR
         run: |
-          docker tag HTTP_server:${{ steps.get_tag.outputs.TAG_NAME }} 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:${{ steps.get_tag.outputs.TAG_NAME }}
+          docker tag portforward:${{ steps.get_tag.outputs.TAG_NAME }} 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:${{ steps.get_tag.outputs.TAG_NAME }}
           docker push 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:${{ steps.get_tag.outputs.TAG_NAME }}
           
       - name: Execute version and name
         run: |
-          echo "Application Name: HTTP_server"
+          echo "Application Name: portforward"
           echo "Tag Version: ${{ steps.get_tag.outputs.TAG_NAME }}"

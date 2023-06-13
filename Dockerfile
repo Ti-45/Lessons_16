@@ -11,4 +11,4 @@ RUN apt update && apt upgrade -y && apt install python3 -y
 COPY ./app-code/ /app-code/
 
 # Specifies the default command to be executed when a container is created from this image. It runs the Python script port_48888.py using the python3 interpreter.
-CMD [ "python3", "HTTP_server.py" ]
+CMD [ "python3", "portforward.py" ]
