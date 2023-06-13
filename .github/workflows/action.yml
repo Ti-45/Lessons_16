@@ -3,7 +3,7 @@ name: Docker build image and push to ECR
 on:
   push:
     tags:
-      - 'v*' # Следующая строка проверяет семантическую версию
+      - 'v*' # The next line checks the semantic version
       - 'v*.*.*'
 jobs:
   build:
@@ -13,13 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # Извлечение всей истории для получения доступа к тегам
+          fetch-depth: 0 # Extracting the entire history to access tags
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.MY_AWS_ACCSES_KEY }}
-          aws-secret-access-key: ${{ secrets.MY_AWS_SECRET_KEY }}
+          aws-access-key-id: ${{ secrets.AWS_ACCSES_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
           aws-region: eu-central-1
 
       - name: Get tag name
@@ -29,9 +29,10 @@ jobs:
       - name: Check tag format
         run: |
             if [[ ! "${{ steps.get_tag.outputs.TAG_NAME }}" =~ ^HTTP_server-v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-              echo "Неверный формат тега. Разрешены только семантические версии тегов."
+              echo "Invalid tag format. Only semantic versions of tags are allowed"
               exit 1
-            fiHTTP_server
+            fi
+
       - name: Log in to Amazon ECR
         run: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan
 
@@ -47,5 +48,5 @@ jobs:
           
       - name: Execute version and name
         run: |
-          echo "Название приложения: HTTP_server"
-          echo "Версия тега: ${{ steps.get_tag.outputs.TAG_NAME }}"
+          echo "Application Name: HTTP_server"
+          echo "Tag Version: ${{ steps.get_tag.outputs.TAG_NAME }}"
