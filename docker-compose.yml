@@ -1,9 +1,11 @@
 version: '3'
+
 services:
   my-service:
-    build: .
-    image: 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan
+    build:
+      context: .
+      dockerfile: Docherfile
     environment:
-    - PORT=48888
+      PORT: 48888
     ports:
-    - "48888:48888"
+      - "48888:48888"
