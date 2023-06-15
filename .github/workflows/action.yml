@@ -3,7 +3,7 @@ name: Docker build image and push to ECR
 on:
   push:
     tags:
-      - 'v*' # The next line checks the semantic version
+      - 'v*'
       - 'v*.*.*'
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0 # Extracting the entire history to access tags
+          fetch-depth: 0 
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2

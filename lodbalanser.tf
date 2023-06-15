@@ -43,7 +43,8 @@ resource "aws_lb_target_group" "example" {
   vpc_id   = aws_vp.example.id  # Укажите ID вашего VPC
 }
 
-resource "aws_security_group" "example" {  name        = "example-sg"
+resource "aws_security_group" "example" {  
+  name        = "example-sg"
   description = "Example security group"
 
   ingress {
