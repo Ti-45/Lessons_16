@@ -1,4 +1,5 @@
 import http.server
+import os
 import socketserver
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
@@ -6,10 +7,15 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
-        self.wfile.write(b"port request succeeded")
+        user_name = "Azat Stepanyan" 
+        response_text = f"Hello {user_name}. This is my exam project text"
+        self.wfile.write(response_text.encode())
 
-PORT = 48888
+def run_server(port):
+    with socketserver.TCPServer(("", port), MyHandler) as httpd:
+        print("The server is running on port", port)
+        httpd.serve_forever()
 
-with socketserver.TCPServer(("", PORT), MyHandler) as httpd:
-    print("The server is running on a port", PORT)
-    httpd.serve_forever()
+if __name__ == "__main__":
+    port = int(os.environ.get('PORT', 48888))
+    run_server(port)
