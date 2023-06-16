@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: Docherfile
     environment:
+      TRAINER_NAME: "Karen Kostanyan" 
       PORT: 48888
     ports:
       - "48888:48888"
