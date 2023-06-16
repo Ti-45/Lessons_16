@@ -1,0 +1,11 @@
+---
+# handlers file for demo
+#
+- name: Restart httpd
+  ansible.builtin.service:
+    name: httpd
+    state: restarted
+- name: Restart apache2 
+  ansible.builtin.service:
+    name: apache2
+    state: restarted

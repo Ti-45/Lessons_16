@@ -1,0 +1,5 @@
+- name: my playbook for demo role
+  become: true
+  hosts: myHosts
+  roles:
+    - demo
