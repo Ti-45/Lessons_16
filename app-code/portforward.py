@@ -7,7 +7,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
-        user_name = "Azat Stepanyan" 
+        user_name = "Karen Kostanyan" 
         response_text = f"Hello {user_name}. This is my exam project text"
         self.wfile.write(response_text.encode())
 
