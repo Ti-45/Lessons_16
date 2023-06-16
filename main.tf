@@ -1,20 +1,39 @@
+variable "instance_count" {
+
+description = "Number of EC2 instances to create"
+type = number
+default =1
+
+}
 provider "aws" {
-  region = "eu-central-1"  # Укажите желаемый регион AWS
+  region = "eu-central-1"  
 }
 
 resource "aws_instance" "example" {
-  ami           = "ami-0329d3839379bfd15"  # Укажите AMI ID для вашего желаемого образа EC2
-  instance_type = "t2.micro"  # Укажите желаемый тип экземпляра
-
+  ami           = "ami-04e601abe3e1a910f" 
+  instance_type = "t2.micro"
+  key_name      = "KEY"
+  user_data = <<-E0OT
+    #!/bin/bash
+    apt update -y
+    apt install -y python3-pip
+    pip3 install ansible
+  EOT
+  
   tags = {
-    Name = "example-instance"
+  Name = "Ansible Controle node"
   }
 }
 
-resource "aws_launch_configuration" "example" {
-  name_prefix   = "example-lc-"
-  image_id      = aws_instance.example.ami
-  instance_type = aws_instance.example.instance_type
+
+resource "aws_instance" "managed" {
+  count         = var.instance_count
+  ami           = "ami-04e601abe3e1a910f" 
+  instance_type = "t2.micro"
+  key_name      = "KEY"
+  
+  tags = {
+    Name = "Managed node-${count.index + 1}"
 
   security_groups = [aws_security_group.example.id]  # Укажите ID вашей группы безопасности
 }
