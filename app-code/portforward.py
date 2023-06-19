@@ -7,8 +7,8 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/plain")
         self.end_headers()
-        trainer_name = os.environ.get('TRAINER_NAME')
-        port = os.environ.get('PORT')
+        trainer_name = os.environ.get('TRAINER_NAME','Karen Kostanyan')
+        port = int(os.environ.get('PORT', 48888))
         response_text = f"Hello {trainer_name}. This is my exam project text"
         self.wfile.write(response_text.encode())
 
