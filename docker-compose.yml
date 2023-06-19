@@ -1,11 +1,11 @@
 version: '3'
 services:
-  myapp:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  apprun:
+    image: 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:v1.0.17
     ports:
       - "48888:48888"
     environment:
-      - TRAINER_NAME="Karen Kostanyan" 
+      - TRAINER_NAME="Karen7Kostanyan" 
       - PORT="48888"
+    env_file:
+      - .env
