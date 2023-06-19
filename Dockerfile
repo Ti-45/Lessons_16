@@ -8,7 +8,7 @@ WORKDIR /app-code
 RUN apt update && apt upgrade -y && apt install python3  -y
 
 # Copies the contents of the local ./app-code/ directory into the /app-code/ directory in the container
-COPY --chown=1000:1000  ./app-code/ /app-code/
+COPY ./app-code/ /app-code/
 
 # Specifies the default command to be executed when a container is created from this image. It runs the Python script appreadport.py using the python3 interpreter.
 CMD [ "python3", "appreadport.py" ]
