@@ -20,3 +20,7 @@ Sets the working directory inside the container to /app-code
 Updates the package lists for the Ubuntu package manager (apt), upgrades the installed packages to their latest versions, and installs Python3
 Copies the contents of the local ./app-code/ directory into the /app-code/ directory in the container
 Specifies the default command to be executed when a container is created from this image. It runs the Python script appreadport.py using the python3 interpreter.
+
+
+docker-compose
+
