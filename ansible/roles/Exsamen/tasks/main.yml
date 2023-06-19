@@ -1,0 +1,11 @@
+---
+# tasks file for Exsamen
+#
+- name: Add the user 'Azat' with a specific uid and a primary group of 'sudo'
+  ansible.builtin.user:
+    name: Azat
+    comment: my Exsamen user
+    uid: 1040
+    group: sudo
+    shell: /bin/bash
+    password: "{{ 'admin' | password_hash('sha512', 'solt') }}"

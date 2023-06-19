@@ -1,6 +1,0 @@
----
-# defaults file for demo
-#
-amazon_linux_pkg: ["httpd", "net-tools", "curl", "unzip"]
-ubuntu_pkg: ["apache2", "net-tools", "curl", "unzip"]
-webserver_message: "Hello Yerevan"
