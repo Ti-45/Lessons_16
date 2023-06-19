@@ -3,7 +3,7 @@ services:
   myapp:
     build:
       context: .
-      dockerfile: Docherfile
+      dockerfile: Dockerfile
     ports:
       - "48888:48888"
     environment:
