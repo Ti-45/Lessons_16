@@ -1,9 +1,9 @@
 version: '3'
 services:
-  apprun:
+  app:
     image: 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:v1.0.17
-    environment:
-      - TRAINER_NAME="Karen Kostanyan" 
-      - PORT=50000
     ports:
-      - "PORT:48888"
+      - 48888:48888
+    environment:
+      - TRAINER_NAME=Karen Kostanyan 
+      - PORT=48888
