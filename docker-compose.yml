@@ -6,4 +6,4 @@ services:
       - TRAINER_NAME="Karen Kostanyan" 
       - PORT=48888
     ports:
-      - ${PORT}:48888
+      - PORT:48888
