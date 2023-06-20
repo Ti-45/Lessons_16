@@ -3,7 +3,7 @@ services:
   app:
     image: 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan:v1.0.18
     ports:
-      - 50000:48888
+      - 50000:50000
     environment:
       - TRAINER_NAME=Azat
       - PORT=50000
