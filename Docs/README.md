@@ -24,3 +24,8 @@ Specifies the default command to be executed when a container is created from th
 
 docker-compose
 
+
+ansible-playbook my-playbook.yml -i my-inventory.ini --private-key ~/.ssh/KEY.pem -u ubuntu
+
+
+aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan
