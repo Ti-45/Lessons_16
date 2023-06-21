@@ -9,10 +9,6 @@
   import_tasks: ubuntu.yml
   when: ansible_facts['distribution']|lower == 'ubuntu'
 
-- name: Install the correct web server for ubuntu
-  import_tasks: update_upgrade.yml
-  when: ansible_facts['distribution']|lower == 'ubuntu'
-
 - name: Download docker compose file
   ansible.builtin.get_url:
     url: https://github.com/docker/compose/releases/download/v2.18.1/docker-compose-linux-x86_64
