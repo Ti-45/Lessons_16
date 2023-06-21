@@ -29,3 +29,7 @@ ansible-playbook my-playbook.yml -i my-inventory.ini --private-key ~/.ssh/KEY.pe
 
 
 aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan
+
+
+
+ansible-playbook -i my-playbook.yml my-inventory.ini  --private-key ~/KEY.pem 
