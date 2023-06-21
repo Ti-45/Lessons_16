@@ -1,0 +1,27 @@
+- name: Install packages for ubuntu
+  ansible.builtin.apt:
+    name: "{{ ubuntu_pkg }}"
+    state: latest
+    update_cache: yes
+
+- name: Add Docker GPG apt Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    state: present
+
+- name: Install docker for ubuntu
+  ansible.builtin.apt:
+    name: "{{ docker_pkg }}"
+    state: latest
+    update_cache: yes
+
+- name: Add the user 'ubuntu' to the group 'docker'
+  ansible.builtin.user:
+    name: ubuntu
+    groups: docker 
+    append: yes

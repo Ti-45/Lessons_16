@@ -1,0 +1,22 @@
+- name: Install packages for amazon
+  ansible.builtin.yum:
+    name: "{{ amazon_pkg }}"
+    state: latest
+    update_cache: yes
+
+- name: Add Docker Repository
+  yum_repository:
+    repo: https://download.docker.com/linux/centos/docker-ce.repo
+    state: present
+
+- name: Install docker for amazon
+  ansible.builtin.yum:
+    name: "{{ docker_pkg }}"
+    state: latest
+    update_cache: yes
+
+- name: Add the user 'ec2-user' to the group 'docker'
+  ansible.builtin.user:
+    name: ec2-user
+    groups: docker
+    append: yes
