@@ -18,4 +18,52 @@
 - name: Check if aws cli exists
   ansible.builtin.shell: aws --version
   register: aws_out
-  ignore_errors: true 
+  ignore_errors: true
+
+- name: Download awccli zip file
+  ansible.builtin.get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: awscliv2.zip
+  when: aws_out.rc != 0
+
+- name: Unarchive amazon cli zip
+  ansible.builtin.unarchive:
+    src: /home/ubuntu/awscliv2.zip
+    dest: ./
+    remote_src: yes
+  when: aws_out.rc != 0
+
+- name: install aws cli
+  ansible.builtin.shell: ./aws/install
+  when: aws_out.rc != 0
+
+- name: Remove aws folder
+  ansible.builtin.file:
+    path: aws
+    state: absent
+
+- name: Remove aws zip folder
+  ansible.builtin.file:
+    path: awscliv2.zip
+    state: absent
+
+- name: Clone git repo 
+  ansible.builtin.git:
+    repo: 'https://{{ git_user }}:{{ git_token }}@github.com/bdg-devops-03-23-exam/azat-stepanyan.git'
+    dest: /home/ubuntu/azat-stepanyan
+    update: yes
+
+- name: Login AWS ECR
+  ansible.builtin.shell: aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin ${aws_url}
+- name: Up docker compose
+  ansible.builtin.shell: docker-compose -f azat-stepanyan/docker-compose.yml  up -d
+  environment:
+    IMAGE_TAG: "{{ docker_image_tag }}"
+
+- name: List managed node EC2 instances
+  shell: aws ec2 describe-instances --filters "Name=tag:dynamic_inventory,Values=true" --region eu-central-1 --query "Reservations[].Instances[].InstanceId"
+  register: ec2_instances
+
+- name: Register target
+  shell: "aws elbv2 register-targets --target-group-arn ${target_grup} --targets Id={{ item }} --region eu-central-1"
+  loop: "{{ ec2_instances.stdout }}"

@@ -1,5 +1,5 @@
----
-- hosts: myHosts
+- name: my playbook for Exsamen role
   become: true
+  hosts: myHosts
   roles:
-    - Exsamen 
+    - Exsamen

@@ -2,4 +2,6 @@
 # defaults file for Exsamen
 ubuntu_pkg: ["ca-certificates",  "curl", "gnupg", "unzip"]
 amazon_pkg: ["yum-utils", "unzip"]
-docker_pkg: ["docker-ce", "docker-ce-cli", "containerd.io", "docker-buildx-plugin", "docker-compose-plugin"] 
+docker_pkg: ["docker-ce", "docker-ce-cli", "containerd.io", "docker-buildx-plugin", "docker-compose-plugin"]
+Aaws_url: "815111324020.dkr.ecr.eu-central-1.amazonaws.com/stepanyan"
+target_grup: "arn:aws:elasticloadbalancing:eu-central-1:815111324020:targetgroup/lod/c02bbf5463fccbc9"
