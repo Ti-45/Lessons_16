@@ -22,6 +22,10 @@ Copies the contents of the local ./app-code/ directory into the /app-code/ direc
 Specifies the default command to be executed when a container is created from this image. It runs the Python script appreadport.py using the python3 interpreter.
 
 
+git tag v1.0.3
+git push origin v1.0.3
+
+
 docker-compose
 
 
